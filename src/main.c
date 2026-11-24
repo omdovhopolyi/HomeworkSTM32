@@ -104,11 +104,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if (TIM2 == htim->Instance) {
         HAL_GPIO_WritePin(MOTOR_PORT, MOTOR_PIN, GPIO_PIN_SET);
         HAL_TIM_Base_Stop_IT(htim);
+        __HAL_TIM_SET_COUNTER(&htim3, 0);
         HAL_TIM_Base_Start_IT(&htim3);
     }
     else if (TIM3 == htim->Instance) {
         HAL_GPIO_WritePin(MOTOR_PORT, MOTOR_PIN, GPIO_PIN_RESET);
         HAL_TIM_Base_Stop_IT(htim);
+        __HAL_TIM_SET_COUNTER(&htim2, 0);
         HAL_TIM_Base_Start_IT(&htim2);
     }
 }
